@@ -43,16 +43,6 @@ class CreateBoard extends React.Component {
       boardList: newList,
     });
   };
-  /* 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.boardList !== this.state.boardList) {
-      trelloApi.getBoards().then((boards) => {
-        this.setState({
-          boardList: boards.data,
-        });
-      });
-    }
-  } */
 
   render() {
     return (

@@ -49,7 +49,6 @@ class ListOnBoard extends React.Component {
               border: "1px solid black",
               borderRadius: "10px",
               width: "15rem",
-              //   backgroundColor: "#7CB9E8",
               padding: "10px",
             }}
           >

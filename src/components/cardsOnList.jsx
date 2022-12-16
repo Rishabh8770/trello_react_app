@@ -17,36 +17,38 @@ class CardOnList extends React.Component {
     });
   }
 
-  handleAddCard = (e,val) => {
+  handleAddCard = (e, val) => {
     e.preventDefault();
-    if(this.state.cardName.length === 0 || this.state.cardName.length === null){
-        alert('please enter text')
-    }else{
-        trelloApi.createCard(this.state.cardName, val).then((res) => {
-            this.setState({ 
-                cardName: "",
-                cards:[...this.state.cards, res.data],
-            })
-        })
+    if (
+      this.state.cardName.length === 0 ||
+      this.state.cardName.length === null
+    ) {
+      alert("please enter text");
+    } else {
+      trelloApi.createCard(this.state.cardName, val).then((res) => {
+        this.setState({
+          cardName: "",
+          cards: [...this.state.cards, res.data],
+        });
+      });
     }
-  }
+  };
 
   handleChange = (e) => {
     this.setState({
-        cardName: e.target.value
-    })
-  }
-  
-  handleDelete = async (val) => {
-    await trelloApi.deleteCard(val)
-    let newCards = this.state.cards.filter((card) => {
-        return card.id !== val
-    })
-    this.setState({
-        cards: newCards,
-    })
-  } 
+      cardName: e.target.value,
+    });
+  };
 
+  handleDelete = async (val) => {
+    await trelloApi.deleteCard(val);
+    let newCards = this.state.cards.filter((card) => {
+      return card.id !== val;
+    });
+    this.setState({
+      cards: newCards,
+    });
+  };
 
   render() {
     return (
@@ -56,23 +58,57 @@ class CardOnList extends React.Component {
           : this.state.cards.map((card) => {
               return (
                 <div key={card.id}>
-                <p style={{ color: "black",width:'13.5rem', height:'5rem', border:'1px solid black', margin:"2px", display:'flex', justifyContent:'center' }}>{card.name}</p>
-                <Button style={{margin:'3px'}} variant='danger' onClick={(e) => this.handleDelete(card.id)}>Remove</Button>
-                   
-                    <CheckList checkListId={card.id}/>
-                              
+                  <p
+                    style={{
+                      color: "black",
+                      width: "13.5rem",
+                      height: "5rem",
+                      border: "1px solid black",
+                      margin: "2px",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {card.name}
+                  </p>
+                  <Button
+                    style={{ margin: "3px" }}
+                    variant="danger"
+                    onClick={(e) => this.handleDelete(card.id)}
+                  >
+                    Remove
+                  </Button>
+
+                  <CheckList checkListId={card.id} />
                 </div>
               );
-              
-                
             })}
-            <div style={{display:'flex', alignItems:'center', padding:"2px", marginTop:"2rem"}}>
-            <form>
-            <Button variant="primary" style={{margin:'5px'}} onClick={(e) => this.handleAddCard(e, this.props.listId)}>Add Card</Button>
-            <input type="text" placeholder="Card Name" style={{width:'6rem'}} onChange={(e) => this.handleChange(e)} value={this.state.cardName}></input>
-            </form>
-            </div>
-            </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: "2px",
+            marginTop: "2rem",
+          }}
+        >
+          <form>
+            <Button
+              variant="primary"
+              style={{ margin: "5px" }}
+              onClick={(e) => this.handleAddCard(e, this.props.listId)}
+            >
+              Add Card
+            </Button>
+            <input
+              type="text"
+              placeholder="Card Name"
+              style={{ width: "6rem" }}
+              onChange={(e) => this.handleChange(e)}
+              value={this.state.cardName}
+            ></input>
+          </form>
+        </div>
+      </div>
     );
   }
 }
