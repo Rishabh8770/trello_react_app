@@ -16,3 +16,39 @@ export function createBoard(val){
 export function deleteBoards(id){
     return axios.delete(`https://api.trello.com/1/boards/${id}?key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
 }
+
+export function getLists(id){
+    return axios.get(`https://api.trello.com/1/boards/${id}/lists?key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
+}
+
+export function addList(id, name){
+    return axios.post(`https://api.trello.com/1/boards/${id}/lists?name=${name}&key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
+}
+
+export function deleteList(id){
+    return axios.put(`https://api.trello.com/1/lists/${id}/closed?value=true&key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
+}
+
+export function getCards(id){
+    return axios.get(`https://api.trello.com/1/lists/${id}/cards?key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
+}
+
+export function createCard(name, idList){
+    return axios.post(`https://api.trello.com/1/cards?name=${name}&idList=${idList}&key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
+}
+
+export function deleteCard(id){
+    return axios.delete(`https://api.trello.com/1/cards/${id}?key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
+}
+
+export function getChecklist(id){
+    return axios.get(`https://api.trello.com/1/cards/${id}/checklists?key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
+}
+
+export function createChecklist(id, name){
+    return axios.post(`https://api.trello.com/1/checklists?idCard=${id}&name=${name}&key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
+}
+
+export function deleteChecklist(id){
+    return axios.delete(`https://api.trello.com/1/checklists/${id}?key=857433641f31e33014fd315ea42cdb2a&token=ATTA54d866403fc3ceb960638e84ecbe6027fa6d870cf1c996afee6f26b24451e2fdD8FC6562`)
+}
