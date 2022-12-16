@@ -26,8 +26,8 @@ class Navbaar extends Component {
               <Nav.Link href="#home" style={{ color: "white" }}>
                 Workspace
               </Nav.Link>
-              <Nav.Link href="#link" style={{ color: "white" }}>
-                Recent
+              <Nav.Link href="/" style={{ color: "white" }}>
+                Home
               </Nav.Link>
             </Nav>
             <Form className="d-flex">
