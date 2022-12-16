@@ -1,15 +1,30 @@
 import logo from "./logo.svg";
 import Navbar from "./components/navbar";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ListOnBoard from "./components/listOnBoard";
 
 import "./App.css";
 import CreateBoard from "./components/createAndDisplayBoard";
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-      <CreateBoard />
+      <Navbar />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <CreateBoard />
+              </>
+            }
+          />
+
+          <Route path="/:id" element={<ListOnBoard />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
