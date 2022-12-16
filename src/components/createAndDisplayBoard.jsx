@@ -1,7 +1,8 @@
 import React from "react";
 import * as trelloApi from "../Api";
-import BoardDetails from "./boardsDetail";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import ListOnBoard from "./listOnBoard";
 
 class CreateBoard extends React.Component {
   state = {
@@ -18,20 +19,26 @@ class CreateBoard extends React.Component {
   }
 
   handleSubmit = async (e) => {
-    //  e.preventDefault();
+     e.preventDefault();
     const createNewBoard = await trelloApi.createBoard(this.state.boardName);
-    this.setState({
-      boardName: "",
-      boardList: [...this.state.boardList, createNewBoard.data],
-    });
+    if(this.state.boardName.length === 0){
+      alert("please enter text")
+    }else{
+      this.setState({
+        boardName: "",
+        boardList: [...this.state.boardList, createNewBoard.data],
+      });
+    }
+    
   };
 
   handleDelete = async (val) => {
     await trelloApi.deleteBoards(val);
-    // console.log(newList)
+
     let newList = this.state.boardList.filter((element) => {
       return element.id !== val;
     });
+
     this.setState({
       boardList: newList,
     });
@@ -48,7 +55,6 @@ class CreateBoard extends React.Component {
   } */
 
   render() {
-    console.log(this.state.boardList);
     return (
       <div>
         <div
@@ -77,7 +83,6 @@ class CreateBoard extends React.Component {
               variant="primary"
               onClick={(e) => {
                 this.handleSubmit(e);
-                //   console.log('sachin')
               }}
             >
               Submit
@@ -98,7 +103,6 @@ class CreateBoard extends React.Component {
                       marginTop: "3rem",
                       width: "15rem",
                       height: "10rem",
-
                       backgroundColor: "#004040",
                       color: "white",
                     }}
@@ -118,7 +122,11 @@ class CreateBoard extends React.Component {
                         justifyContent: "space-around",
                       }}
                     >
-                      <Button variant="primary">View</Button>
+                      <Link to={`/${element.id}`}>
+                        <Button variant="primary" type="button">
+                          View
+                        </Button>
+                      </Link>
                       <Button
                         onClick={(e) => {
                           this.handleDelete(element.id);
