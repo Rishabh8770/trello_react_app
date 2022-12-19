@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import * as trelloApi from "../Api";
+import CheckItems from "./checkItems";
 
 class CheckList extends Component {
   constructor(props) {
@@ -61,6 +62,8 @@ class CheckList extends Component {
     }) 
   }
 
+ 
+
   render() {
     return (
       <>
@@ -79,9 +82,11 @@ class CheckList extends Component {
             </form>
             {this.state.checklist.map((element) => {
               return (
-                <div style={{widhth:'auto', border:'1px solid blue', display:'flex', flexDirection:'column-reverse', margin:"5px"}}>
+                <div style={{widhth:'auto', border:'1px solid blue', display:'flex', flexDirection:'column', margin:"5px"}} key={element.id}>
+                <p style={{margin:'2px', textDecorationLine: "underline"}}>{element.name}</p>
+                    <CheckItems itemsId={element.id} cardId={this.props.checkListId}/>
                   <Button variant="danger" style={{width:'5rem', margin:'2px'}} onClick={(e) => this.handleDeleteChecklist(element.id)}>Delete</Button>
-                  <p style={{margin:'2px', textDecorationLine: "underline"}}>{element.name}</p>
+                  
                 </div>
               );
             })}
